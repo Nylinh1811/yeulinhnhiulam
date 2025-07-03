@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tui gửi em 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #ffe0f0 url('https://i.imgur.com/dZ1u5Zk.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 50px;
+      font-size: 2em;
+      text-shadow: 1px 1px 5px hotpink;
+    }
+    #questionContainer {
+      position: relative;
+      width: 400px;
+      height: 350px;
+      margin: 100px auto 0;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      color: #333;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+    }
+    #yesBtn, #noBtn {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.2s;
+    }
+    #yesBtn {
+      background-color: #90ee90;
+      left: 80px;
+      top: 200px;
+    }
+    #noBtn {
+      background-color: #ffcccb;
+      left: 220px;
+      top: 200px;
+    }
+    #heartLoader, #resultContainer, #loveMessage {
+      display: none;
+      margin-top: 20px;
+    }
+    #heartLoader {
+      font-size: 24px; color: red;
+    }
+    #resultContainer {
+      font-size: 22px; color: hotpink;
+    }
+    #loveMessage {
+      font-size: 18px; color: #cc3366;
+      background: #fff0f5; padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px pink;
+      margin-top: 15px;
+      line-height: 1.4;
+    }
+    .heart {
+      position: fixed;
+      width: 20px; height: 20px;
+      background: transparent;
+      animation: float 5s linear infinite;
+      z-index: 999;
+    }
+    .heart::before, .heart::after {
+      content: ''; position: absolute; width: 20px; height: 20px;
+      background: red; border-radius: 50%;
+    }
+    .heart::before { left: -10px; }
+    .heart::after { top: -10px; }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💌 Linh ơi, tui có điều muốn nói… 💞</h1>
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+  <div id="questionContainer">
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 💔</button>
+    <div id="heartLoader">💓 tui đang suy nghĩ giùm em...</div>
+    <div id="resultContainer">💘 tui biết mà! Cảm ơn em 😍</div>
+    <div id="loveMessage">
+      Từ giây phút đầu tiên nhìn thấy Linh,<br>
+      tui biết trái tim mình đã không thể quay đầu nữa 🌹<br>
+      Cảm ơn Linh vì đã đến, vì đã khiến mỗi ngày của tui trở nên đặc biệt! 💑
+    </div>
+  </div>
+  <script>
+    const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+    const qc = document.getElementById("questionContainer");
+    const loader = document.getElementById("heartLoader");
+    const res = document.getElementById("resultContainer");
+    const msg = document.getElementById("loveMessage");
+
+    noBtn.addEventListener("mouseover", () => {
+      const mx = qc.offsetWidth - noBtn.offsetWidth;
+      const my = qc.offsetHeight - noBtn.offsetHeight;
+      noBtn.style.left = `${Math.random() * mx}px`;
+      noBtn.style.top = `${Math.random() * my}px`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      loader.style.display = "block";
+      res.style.display = "none";
+      msg.style.display = "none";
+      setTimeout(() => {
+        loader.style.display = "none";
+        res.style.display = "block";
+        msg.style.display = "block";
+      }, 3000);
+    });
+
+    function createHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.top = "100vh";
+      h.style.transform = `scale(${Math.random() + 0.5})`;
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 5000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
